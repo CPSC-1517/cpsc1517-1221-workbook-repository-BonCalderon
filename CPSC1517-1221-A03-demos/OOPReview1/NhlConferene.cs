@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OOPReview1
 {
-    public enum NhlConference
+    public enum NhlConferene
     {
-        Easter,
+        Eastern,
         Western
     }
 }

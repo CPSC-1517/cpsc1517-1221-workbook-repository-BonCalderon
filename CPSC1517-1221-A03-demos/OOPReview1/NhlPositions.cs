@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace OOPReview1
 {
-    public enum NhlDivision
+    public class NhlPositions
     {
-        Metropolitan, 
-        Atlantic, 
-        Central, 
-        Pacific
+        public enum NhlPosition { LW, RW, C, D, G}
     }
 }
