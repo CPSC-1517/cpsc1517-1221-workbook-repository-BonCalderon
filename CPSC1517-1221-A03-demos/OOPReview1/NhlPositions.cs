@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOPReview1
 {
-    public class NhlPositions
-    {
+    
         public enum NhlPosition { LW, RW, C, D, G}
-    }
+    
 }

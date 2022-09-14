@@ -20,7 +20,7 @@ namespace OOPReview1
         
         //properties
 
-        public NhlPositions nhlPositions { get; private set; }
+        
 
         public int Number //property for number
         {
@@ -52,29 +52,15 @@ namespace OOPReview1
                 }
             }
         }
-        public string Position //property for position
-        {
-            get { return _position; }
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentNullException("Must Choose a position");
-                }
-                else
-                {
-                    _position = value.Trim();
-                }
-            }
-        }
+
 
         //overloaded constructor or greedy constructor
-
-        public NhlRoster(int number, string name, string position) //greedy construcotr for roster class include fully implemented properties
+        public NhlPosition playerPosition { get; set; }
+        public NhlRoster(int number, string name,  NhlPosition position) //greedy construcotr for roster class include fully implemented properties
         {
             Number = number;
             Name = name;
-            Position = Position;
+            playerPosition = position;
         }
 
         
@@ -82,7 +68,7 @@ namespace OOPReview1
         public override string ToString()
         {
             //return base.ToString();
-            return $"{Number},{Name},{Position}";
+            return $"{Number},{Name},{playerPosition}";
         }
     }
 }
