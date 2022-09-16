@@ -28,6 +28,13 @@ namespace NhlSystem
             Goals = 0;
             Assists = 0;
         }
+        public Player(string fullName, NhlPosition position, int primaryNo, int goals,int assists) : base(fullName)
+        {
+            Position = position;
+            PrimaryNo = primaryNo;
+            Goals = goals;
+            Assists = assists;
+        }
 
     }
 }
