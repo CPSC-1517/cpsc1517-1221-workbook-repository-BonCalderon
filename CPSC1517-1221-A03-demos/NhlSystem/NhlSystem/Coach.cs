@@ -10,12 +10,17 @@ namespace NhlSystem
     public class Coach : Person // colon is the inheritance  meanas Coach class will inherit from Person class
     {
         //Define an auto-implemented property for HireDate
-        public DateTime HireDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         //define cosntructor that passes FullName to the Person base Class
-        public Coach(String fullName, DateTime hireDate) : base(fullName)
+        public Coach(String fullName, DateTime startDate) : base(fullName)
         {
-            HireDate = hireDate;
+            StartDate = startDate;
+        }
+
+        public override string ToString()
+        {
+            return $"{FullName},{StartDate}";
         }
 
     }

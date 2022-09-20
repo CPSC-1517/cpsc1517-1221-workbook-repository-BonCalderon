@@ -67,6 +67,37 @@ catch (ArgumentException ex)
     Console.WriteLine(ex.Message); //the output should be the error message FullName must contain 3 or more characters
 }
 
+// Test creating a new Team
+//pre requisite is a Coach . Create a new Coach for the team
+DateTime startDate = DateTime.Parse("2021-09-02");
+Coach oilersCoach = new Coach("Jay Woodcroft",startDate);
+//create a new Team
+Team oilersTeam = new Team("Edmonton Oilers",oilersCoach);
+//add 3 players to the team
+Player player1 = new Player("Connor McDavid", NhlPosition.C, 97);
+Player player2 = new Player("Evander Kane", NhlPosition.LW, 91);
+Player player3 = new Player("Leeon Draisaitl", NhlPosition.C, 29);
+
+oilersTeam.AddPlayer(player1);
+oilersTeam.AddPlayer(player2);
+oilersTeam.AddPlayer(player3);
+//assign goals and assists to each player
+player1.Goals = 44;
+player1.Assists = 79;
+player2.Goals = 22;
+player2.Assists = 17;
+player3.Goals = 55;
+player3.Assists = 55;
 
 
+//check that the Team has 3 players
+Console.WriteLine($"Players in team is {oilersTeam.Players.Count}");
+//print each player in the team
+foreach(Player currentPlayer in oilersTeam.Players)
+{
+    Console.WriteLine(currentPlayer);
+}
+//chek the totalPlayerPoints. Should be (44+79+22+17+55+55) = 272
+Console.WriteLine($"Total player points is {oilersTeam.TotalPlayerPoints}");
+Console.ReadKey();
 
