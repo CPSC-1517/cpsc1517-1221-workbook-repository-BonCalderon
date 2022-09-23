@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace NhlSystem
 {
@@ -28,19 +29,22 @@ namespace NhlSystem
                 throw new ArgumentException("Team is full. Cannot add any more players");
             }
             //validate that the newPlayer primary number is not aready in used
-            bool primaryNoFound = false;
-            foreach (Player currentPlayer in Players)
-            {
-                if (currentPlayer.PrimaryNo == newPlayer.PrimaryNo)
-                {
-                    primaryNoFound = true;
-                    break;
-                }
-            }
+            //bool primaryNoFound = false;
+            //foreach (Player currentPlayer in Players)
+            //{
+            //    if (currentPlayer.PrimaryNo == newPlayer.PrimaryNo)
+            //    {
+            //        primaryNoFound = true;
+            //        break;
+            //    }
+            //}
+            bool primaryNoFound = Players.Any(currentPlayer => currentPlayer.PrimaryNo == newPlayer.PrimaryNo);
+
             if (primaryNoFound)
             {
                 throw new ArgumentException("PrimaryNo is already in use by another player");
             }
+
 
             //add the newPlayer to the team
             Players.Add(newPlayer);
@@ -51,12 +55,20 @@ namespace NhlSystem
         {
             get
             {
-                int totalPoints = 0;
-                foreach(Player currentPlayer in Players)
-                {
-                    totalPoints += currentPlayer.Points; //+= is totalPoints + currentPlayer.Points
-                }
-                return totalPoints;
+                //int totalPoints = 0;
+                //foreach(Player currentPlayer in Players)
+                //{
+                //    totalPoints += currentPlayer.Points; //+= is totalPoints + currentPlayer.Points
+                //}
+                //return totalPoints;
+
+                //return Players
+                //    .Select(currentPlayer => currentPlayer.Points)
+                //    .Sum() ;
+
+                return Players.Sum(currentPlayer => currentPlayer.Points);
+
+
             }
         }
 
