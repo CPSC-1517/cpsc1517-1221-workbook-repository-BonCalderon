@@ -1,0 +1,56 @@
+﻿@page
+@model WestwindWebApp.Pages.SendMailModel
+@{
+}
+<h1>Email Client App</h1>
+<div class="alert alert-info">
+    @Html.Raw(Model.FeedBackMessage)
+</div>
+<form method="post">
+    <div class="row mb-3">
+        <div class="col-sm-2 col-form-label">
+            <label asp-for="Username" class="form-label">Gmail Username:</label>
+        </div>
+        <div class="col-auto">
+            <input asp-for="Username" type="text" class="form-control" required >
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-2 col-form-label">
+            <label asp-for="Password" class="col-form-label">Gmail App Password:</label>
+        </div>
+        <div class="col-auto">
+            <input asp-for ="Password" type="password" class="form-control">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-2 col-form-label">
+            <label asp-for="Recipient" class="form-label">Mail To:</label>
+        </div>
+        <div class="col-auto">
+            <input type="email" class="form-control" asp-for="Recipient">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-2 col-form-label">
+            <label asp-for="MailSubject" class="form-label">Subject:</label>
+        </div>
+        <div class="col-auto">
+            <input asp-for="MailSubject" class="form-control"/>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-2 col-form-label">
+            <label asp-for="MailMessage">Message:</label>
+        </div>
+        <div class="col-sm-3">
+            <textarea class="form-control" asp-for="MailMessage"></textarea>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Send Mail</button>
+</form>
