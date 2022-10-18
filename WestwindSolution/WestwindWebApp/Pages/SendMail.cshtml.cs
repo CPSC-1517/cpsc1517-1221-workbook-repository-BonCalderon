@@ -67,6 +67,10 @@ namespace WestwindWebApp.Pages
             try
             {
                 sendMailClient.Send(mailMessage);
+                //clear the form fields associated with the properties below
+                MailSubject = "";
+                MailMessage = "";
+                Recipient = "";
                 FeedBackMessage = "<div class='alert alert-primary'>Email Sent!</div>";
             }
             catch (Exception ex)
