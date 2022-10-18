@@ -7,7 +7,7 @@
     @Html.Raw(Model.FeedBackMessage)
 </div>
 <form method="post">
-    <div class="row mb-3">
+    @*<div class="row mb-3">
         <div class="col-sm-2 col-form-label">
             <label asp-for="Username" class="form-label">Gmail Username:</label>
         </div>
@@ -23,7 +23,9 @@
         <div class="col-auto">
             <input asp-for ="Password" type="password" class="form-control">
         </div>
-    </div>
+    </div>*@
+
+
 
     <div class="row mb-3">
         <div class="col-sm-2 col-form-label">
@@ -48,9 +50,14 @@
             <label asp-for="MailMessage">Message:</label>
         </div>
         <div class="col-sm-3">
-            <textarea class="form-control" asp-for="MailMessage"></textarea>
+            <textarea class="form-control" asp-for="MailMessage" rows="10" cols="50"></textarea>
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Send Mail</button>
+    <button type="submit" 
+        asp-page-handler="SendMail"
+        class="btn btn-primary">Send Mail</button>
+    <button type="submit" 
+        asp-page-handler="ClearForm"
+        class="btn btn-secondary">Clear</button>
 </form>
