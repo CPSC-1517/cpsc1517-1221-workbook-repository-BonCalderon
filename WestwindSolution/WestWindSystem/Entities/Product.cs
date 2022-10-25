@@ -8,6 +8,6 @@ namespace WestWindSystem.Entities
 {
     public class Product
     {
-
+          
     }
 }
