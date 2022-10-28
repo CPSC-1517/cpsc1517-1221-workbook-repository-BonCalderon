@@ -1,12 +1,12 @@
 #region namespaces required to setup database services 
 using Microsoft.EntityFrameworkCore;
-using WestWindSystem; // need this namespace to recognize the addbackdependencies method
+using WestWindSystem; // need this namespace to recognize the addbackdependencies method and to activate it
 #endregion
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args); // pre generated code when you create razor page project (web application)
 
 #region code required to setup database servives
-var dbConnectionString = builder.Configuration.GetConnectionString("WestwindLocalDb");
+var dbConnectionString = builder.Configuration.GetConnectionString("WestwindLocalDb");// thsi sets the dbConnectionString to what ever connection string you put in getconnectionstring
 builder.Services.AddBackendDependencies(options => options.UseSqlServer(dbConnectionString));
 
 /*

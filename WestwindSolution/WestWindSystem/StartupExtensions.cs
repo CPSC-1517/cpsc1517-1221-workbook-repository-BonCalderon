@@ -8,7 +8,7 @@ namespace WestWindSystem
    
         public static class StartupExtensions
         {
-            public static void AddBackendDependencies(
+            public static void AddBackendDependencies(   //extension methods always need to be in static class
                 this IServiceCollection services,       // always have these parameters to be able to access service in your program.cs
                 Action<DbContextOptionsBuilder> options) // this option attaches to option parameter inside program.cs after calling method addbackenddependencies
             {

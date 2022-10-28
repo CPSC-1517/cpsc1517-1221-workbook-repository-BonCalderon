@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 #region custom namespaces
 using WestWindSystem.BLL;
-using WestWindSystem.Entities;
+using WestWindSystem.Entities;     //specifies which namespace is and folders its using 
 #endregion
 
 namespace WestwindWebApp.Pages
