@@ -14,15 +14,23 @@ namespace WestWindSystem
             {
                 services.AddDbContext<WestwindContext>(options);
 
-                services.AddTransient<BuildVersionServices>(serviceProvider => { //the service provider is the whole page model in index.cshtml.cs
+                services.AddTransient<BuildVersionServices>(serviceProvider => 
+                { //the service provider is the whole page model in index.cshtml.cs
                     var context = serviceProvider.GetRequiredService<WestwindContext>();
                     return new BuildVersionServices(context);
                 });
 
-                services.AddTransient<CategoryServices>(serviceProvider => {
+                services.AddTransient<CategoryServices>(serviceProvider => 
+                {
                     var context = serviceProvider.GetRequiredService<WestwindContext>();
                     return new CategoryServices(context);
                 });
+
+                //services.AddTransient<ProductServices>(serviceProvider =>
+                //{
+                //    var context = serviceProvider.GetRequiredService<WestwindContext>();
+                //    return new ProductServices(context);
+                //});
 
             }
         }

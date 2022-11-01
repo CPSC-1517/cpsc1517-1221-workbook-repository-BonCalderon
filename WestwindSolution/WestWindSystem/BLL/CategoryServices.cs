@@ -31,7 +31,7 @@ namespace WestWindSystem.BLL
         }
 
         public Dictionary<int, string> DictionaryOfSelectItem() //dictionary is collection of key value pairs. dicionary is like list and arrays but faster
-        {
+        {               //int=key , string=value(CategoryName)
             var query = _dbContext
                 .Categories
                 .OrderBy(item => item.CategoryName)
