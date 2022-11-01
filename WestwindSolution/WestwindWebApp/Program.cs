@@ -6,7 +6,7 @@ using WestWindSystem; // need this namespace to recognize the addbackdependencie
 var builder = WebApplication.CreateBuilder(args); // pre generated code when you create razor page project (web application)
 
 #region code required to setup database servives
-var dbConnectionString = builder.Configuration.GetConnectionString("TrainWatchLocalDB");// thsi sets the dbConnectionString to what ever connection string you put in getconnectionstring
+var dbConnectionString = builder.Configuration.GetConnectionString("WestWindLocalDB");// thsi sets the dbConnectionString to what ever connection string you put in getconnectionstring
 builder.Services.AddBackendDependencies(option => option.UseSqlServer(dbConnectionString));
 
 /*
