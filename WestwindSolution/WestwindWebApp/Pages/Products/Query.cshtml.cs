@@ -22,35 +22,43 @@ namespace WestwindWebApp.Pages.Products
         #region Properties to populate Category select element and track its selected value
         public List<Category> CategoryList { get; private set; } //do not need empty list because we are going to populate it onGet
         
-        [BindProperty] //bind the list of selected items use of asp-for inside cshtml
+        [BindProperty()] //bind the list of selected items use of asp-for inside cshtml
         public int SelectedCategoryId { get; set; }
         public SelectList CategorySelectList { get; private set; }
         #endregion
+        public string FeedBackMessage { get; private set; }
 
 
 
-
-        public void OnGet()
+        public void OnGet(int? currentSelectedCategoryId)
         {
+
             //Fetch from the system (CategoryServices)  a list of Category
             CategoryList = _categoryServices.List();
-            CategorySelectList = new SelectList(_categoryServices.List(),"Id","CategoryName",SelectedCategoryId); //slected category value is passed so you do not need to use asp-for
-
+            CategorySelectList = new SelectList(_categoryServices.List(),"Id","CategoryName",4); //selectedcategory value sets the default
+           
+            if (currentSelectedCategoryId.HasValue && currentSelectedCategoryId.Value > 0)
+            {
+                SelectedCategoryId = currentSelectedCategoryId.Value;
+            }
         }
 
-        public void OnPostSearchByCategory() //make sure capital O and P for On Post
+        public IActionResult OnPostSearchByCategory() //make sure capital O and P for On Post
         {
-
+            FeedBackMessage = "You click on Search by Category";
+            return RedirectToPage(new { currentSelectedCategoryId = SelectedCategoryId });
         }
 
-        public void OnPostSearchByProductName()
+        public IActionResult OnPostSearchByProductName()
         {
-
+            FeedBackMessage = "You click on Search by Product Name";
+            return RedirectToPage();
         }
 
-        public void OnPostClearForm()
+        public IActionResult OnPostClearForm()
         {
-
+            FeedBackMessage = "You click to Clear Form";
+            return RedirectToPage();
         }
     }
 }

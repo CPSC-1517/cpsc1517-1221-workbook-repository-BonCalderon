@@ -1,5 +1,11 @@
-﻿@page
+﻿@page "{currentSelectedCategoryId?}"
 @model WestwindWebApp.Pages.Products.QueryModel
+@if (!string.IsNullOrWhiteSpace(Model.FeedBackMessage))
+{
+    <div class="alert alert-info">
+    @Model.FeedBackMessage
+    </div>
+}
 
 <form method="post">
     <div class="mb-3">
@@ -14,10 +20,11 @@
         }
           </select>*@
 
-        @*dont need to use asp-for is  if you  pass the value of whicch one is collected in the property*@
-          <select class="form-select" aria-label="Category"   
+      
+          <select 
+                  asp-for="SelectedCategoryId"  
                   asp-items="@Model.CategorySelectList">
-            <option selected>---select a category---</option>
+                <option>---select a category---</option>
           </select>
     </div>
     <button type="submit" asp-page-handler="SearchByCategory" class="btn btn-primary">Search by Category</button>
