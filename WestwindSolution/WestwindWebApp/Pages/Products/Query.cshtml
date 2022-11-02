@@ -4,7 +4,7 @@
 <form method="post">
     <div class="mb-3">
         <label asp-for ="SelectedCategoryId">Category</label>
-        <select asp-for="SelectedCategoryId"
+@*        <select asp-for="SelectedCategoryId"
         class="form-select" aria-label="Category">
         <option selected>---select a category---</option>
         
@@ -12,6 +12,15 @@
         {
             <option value="@currentCategory.Id">@currentCategory.CategoryName</option>
         }
-    </select>
+          </select>*@
+
+        @*dont need to use asp-for is  if you  pass the value of whicch one is collected in the property*@
+          <select class="form-select" aria-label="Category"   
+                  asp-items="@Model.CategorySelectList">
+            <option selected>---select a category---</option>
+          </select>
     </div>
+    <button type="submit" asp-page-handler="SearchByCategory" class="btn btn-primary">Search by Category</button>
+    <button type="submit" asp-page-handler="SearchByProductName" class="btn btn-primary">Search by Product Name</button>
+    <button type="submit" asp-page-handler="ClearForm" class="btn btn-primary">Clear</button>
 </form>

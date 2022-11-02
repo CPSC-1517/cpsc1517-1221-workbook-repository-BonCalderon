@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 #region namepsaces for BLL and Entities
 using WestWindSystem.BLL;
 using WestWindSystem.Entities;
@@ -21,8 +22,9 @@ namespace WestwindWebApp.Pages.Products
         #region Properties to populate Category select element and track its selected value
         public List<Category> CategoryList { get; private set; } //do not need empty list because we are going to populate it onGet
         
-        [BindProperty] //bind the list of selected items
+        [BindProperty] //bind the list of selected items use of asp-for inside cshtml
         public int SelectedCategoryId { get; set; }
+        public SelectList CategorySelectList { get; private set; }
         #endregion
 
 
@@ -32,6 +34,22 @@ namespace WestwindWebApp.Pages.Products
         {
             //Fetch from the system (CategoryServices)  a list of Category
             CategoryList = _categoryServices.List();
+            CategorySelectList = new SelectList(_categoryServices.List(),"Id","CategoryName",SelectedCategoryId); //slected category value is passed so you do not need to use asp-for
+
+        }
+
+        public void OnPostSearchByCategory() //make sure capital O and P for On Post
+        {
+
+        }
+
+        public void OnPostSearchByProductName()
+        {
+
+        }
+
+        public void OnPostClearForm()
+        {
 
         }
     }
