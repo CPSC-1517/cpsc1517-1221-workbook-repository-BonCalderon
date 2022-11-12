@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+
 #region namepsaces for BLL and Entities
 using WestWindSystem.BLL;
 using WestWindSystem.Entities;
@@ -11,53 +12,63 @@ namespace WestwindWebApp.Pages.Products
 {
     public class QueryModel : PageModel
     {
-        #region Setup constructor Dependency Injection for BLL
+        #region Setup constructor DI for BLL
         private readonly CategoryServices _categoryServices;
-        public QueryModel(CategoryServices categoryServices)
+        private readonly ProductServices _productServices;
+
+        public QueryModel(CategoryServices categoryServices, ProductServices productServices)
         {
             _categoryServices = categoryServices;
-        }
-        #endregion
+            _productServices = productServices;
 
-        #region Properties to populate Category select element and track its selected value
-        public List<Category> CategoryList { get; private set; } //do not need empty list because we are going to populate it onGet
-        
-        [BindProperty()] //bind the list of selected items use of asp-for inside cshtml
-        public int SelectedCategoryId { get; set; }
-        public SelectList CategorySelectList { get; private set; }
-        #endregion
-        public string FeedBackMessage { get; private set; }
-
-
-
-        public void OnGet(int? currentSelectedCategoryId)
-        {
-
-            //Fetch from the system (CategoryServices)  a list of Category
+            // Fetch from the system (CategoryServices) a list of Category
             CategoryList = _categoryServices.List();
-            CategorySelectList = new SelectList(_categoryServices.List(),"Id","CategoryName",4); //selectedcategory value sets the default
-           
-            if (currentSelectedCategoryId.HasValue && currentSelectedCategoryId.Value > 0)
-            {
-                SelectedCategoryId = currentSelectedCategoryId.Value;
-            }
+            CategorySelectionList = new SelectList(_categoryServices.List(), "Id", "CategoryName");
+
+        }
+        #endregion
+
+        #region Properties to populate Category select element and track is selected value
+        public List<Category> CategoryList { get; private set; }
+        [BindProperty()]
+        public int SelectedCategoryId { get; set; }
+
+        public SelectList CategorySelectionList { get; private set; }
+        #endregion
+
+        [BindProperty]
+        public string? QueryProductName { get; set; }
+
+        [TempData]
+        public string? FeedbackMessage { get; set; }
+
+        public List<Product>? QueryResultList { get; private set; }
+
+        public void OnGet()
+        {
+
         }
 
-        public IActionResult OnPostSearchByCategory() //make sure capital O and P for On Post
+        public void OnPostSearchByCategory()
         {
-            FeedBackMessage = "You click on Search by Category";
-            return RedirectToPage(new { currentSelectedCategoryId = SelectedCategoryId });
+            FeedbackMessage = "You click on Search By Category";
+            QueryResultList = _productServices.FindProductsByCategoryId(SelectedCategoryId);
+            //return RedirectToPage(new { currentSelectedCategoryId = SelectedCategoryId });
         }
 
-        public IActionResult OnPostSearchByProductName()
+        public void OnPostSearchByProductName()
         {
-            FeedBackMessage = "You click on Search by Product Name";
-            return RedirectToPage();
+            FeedbackMessage = "You click on Search By Product Name";
+            QueryResultList = _productServices.FindProductsByProductName(QueryProductName);
+
+            //return RedirectToPage();
         }
 
         public IActionResult OnPostClearForm()
         {
-            FeedBackMessage = "You click to Clear Form";
+            FeedbackMessage = "You click on Clear button";
+            //SelectedCategoryId = 0;
+            //QueryProductName = null;
             return RedirectToPage();
         }
     }
