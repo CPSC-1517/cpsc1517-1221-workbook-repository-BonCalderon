@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using WestWindSystem.DAL;
@@ -31,6 +33,13 @@ namespace WestWindSystem.BLL
                 .Products
                 .Where(currentProduct => currentProduct.ProductName.Contains(partialProductName));
             return query.ToList();
+        }
+
+        public int AddProduct (Product newProduct)
+        {
+            _dbContext.Products.Add(newProduct);
+            _dbContext.SaveChanges();
+            return newProduct.ProductName;
         }
     }
 }

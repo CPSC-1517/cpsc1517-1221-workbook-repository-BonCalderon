@@ -62,5 +62,17 @@ namespace WestWindSystem.BLL
                 .Where(item => item.Description.Contains(partialDescription));
             return query.ToList();
         }
+
+        public int AddCategory(Category newCategory)
+        {
+            bool exists = _dbContext.Categories.Any(categories => categories.CategoryName == categories.CategoryName);
+            if (exists)
+            {
+                throw new Exception("The Category name already exists");
+            }
+            _dbContext.Categories.Add(newCategory);
+            _dbContext.SaveChanges();
+            return newCategory.Id;
+        }
     }
 }

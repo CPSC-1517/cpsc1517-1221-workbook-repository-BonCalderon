@@ -23,15 +23,15 @@ namespace WestwindWebApp.Pages.Products
 
             // Fetch from the system (CategoryServices) a list of Category
             CategoryList = _categoryServices.List();
-            CategorySelectionList = new SelectList(_categoryServices.List(), "Id", "CategoryName");
+            CategorySelectionList = new SelectList(_categoryServices.List(), "Id", "CategoryName", SelectedCategoryId); //populate dropdown selection menu
 
         }
         #endregion
 
         #region Properties to populate Category select element and track is selected value
         public List<Category> CategoryList { get; private set; }
-        [BindProperty()]
-        public int SelectedCategoryId { get; set; }
+        [BindProperty]
+        public int? SelectedCategoryId { get; set; }
 
         public SelectList CategorySelectionList { get; private set; }
         #endregion
@@ -42,7 +42,7 @@ namespace WestwindWebApp.Pages.Products
         [TempData]
         public string? FeedbackMessage { get; set; }
 
-        public List<Product>? QueryResultList { get; private set; }
+        public List<Product> QueryResultList { get; private set; }
 
         public void OnGet()
         {
@@ -52,7 +52,7 @@ namespace WestwindWebApp.Pages.Products
         public void OnPostSearchByCategory()
         {
             FeedbackMessage = "You click on Search By Category";
-            QueryResultList = _productServices.FindProductsByCategoryId(SelectedCategoryId);
+            QueryResultList = _productServices.FindProductsByCategoryId(SelectedCategoryId.Value);
             //return RedirectToPage(new { currentSelectedCategoryId = SelectedCategoryId });
         }
 
