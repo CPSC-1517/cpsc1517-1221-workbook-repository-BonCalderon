@@ -1,10 +1,17 @@
 ﻿@page
 @model WestwindWebApp.Pages.Products.ProductCategoryModel
 
-@if (!string.IsNullOrWhiteSpace(Model.FeedbackMessage))
+@if (Model.InfoMessage != null)
 {
     <div class="alert alert-info">
-        @Model.FeedbackMessage
+        @Model.InfoMessage
+    </div>
+}
+
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @Model.ErrorMessage
     </div>
 }
 
@@ -12,7 +19,7 @@
     <div class="mb-3">
 
         <label asp-for="SelectedCategoryId">Category</label>
-         <select asp-for="SelectedCategoryId"
+@*         <select asp-for="SelectedCategoryId"
         class="form-select"
         aria-label="Category">
         <option selected >--- select a category ---</option>
@@ -20,11 +27,13 @@
         {
         <option value="@currentCategory.Id">@currentCategory.CategoryName</option>
         }
-        </select>
-        @* <select asp-for="SelectedCategoryId"
-                asp-items="Model.CategorySelectionList">
-            <option selected>--- select a category ---</option>
         </select>*@
+         <select asp-for="SelectedCategoryId"
+                asp-items="Model.CategorySelectList"
+                class="form-select form-select-lg mb-3"
+                aria-label=".form-select-lg category">
+            <option>--- select a category ---</option>
+        </select>
     </div>
 
         @*<div class="mb-3">
@@ -33,13 +42,13 @@
                asp-for="QueryProductName" />
          </div>*@
 
-    <button type="submit" asp-page-handler="SearchByCategory" class="btn btn-primary">Fetch Products</button>
-    <button type="submit" asp-page-handler="ClearForm" class="btn btn-light">Clear</button>
-    <button type="submit" asp-page-handler="" class="btn btn-primary">New Product</button>
+    <button type="submit" asp-page-handler="FetchProducts" class="btn btn-primary">Fetch Products</button>
+    <button type="submit" asp-page-handler="Clear" class="btn btn-primary">Clear</button>
+    <button type="submit" asp-page-handler="NewProduct" class="btn btn-primary">New Product</button>
 
 </form>
 
-@if (Model.QueryResultList != null)
+@if (Model.QueryProductResultList != null && Model.QueryProductResultList.Count > 0)
 {
     <table class="table" style="color:black; font-family: Verdana; ">
         <thead>
@@ -50,12 +59,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var currentProduct in Model.QueryResultList)
+            @foreach (var currentProduct in Model.QueryProductResultList)
             {
                 <tr>
                     <td>@currentProduct.Id</td>
                     <td>@currentProduct.ProductName</td>
-                    <td><a asp-area="" asp-page="/Index">Edit</a></td>
+                    <td><a href="/Products/ProductCRUD/@currentProduct.Id">Edit</a></td>
                 </tr>
             }
         </tbody>
