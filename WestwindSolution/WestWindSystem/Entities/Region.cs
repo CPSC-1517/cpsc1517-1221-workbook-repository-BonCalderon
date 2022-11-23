@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WestwindSystem.Entities;
 
-public partial class Region
+[Table(name:"Regions")]
+public  class Region
 {
     [Key]
     [Column("RegionID")]

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace WestWindSystem.Entities
 {
+    [Table(name:"Products")]
     public class Product
     {
         [Key]

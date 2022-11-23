@@ -8,7 +8,8 @@ namespace WestwindSystem.Entities;
 
 [Index("CompanyName", Name = "CompanyName")]
 [Index("AddressId", Name = "UX_Suppliers_AddressID", IsUnique = true)]
-public partial class Supplier
+[Table(name: "Suppliers")]
+public  class Supplier
 {
     [Key]
     [Column("SupplierID")]

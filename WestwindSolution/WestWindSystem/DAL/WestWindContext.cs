@@ -25,11 +25,11 @@ namespace WestWindSystem.DAL
         public DbSet<Product> Products => Set<Product>();
 
 
-        public virtual DbSet<Region> Regions { get; set; }
+        public DbSet<Region> Regions => Set<Region>();
 
-        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Supplier> Suppliers => Set<Supplier>();
 
-        public virtual DbSet<Territory> Territories { get; set; }
+        public DbSet<Territory> Territories => Set<Territory>();
 
 
 

@@ -35,11 +35,5 @@ namespace WestWindSystem.BLL
             return query.ToList();
         }
 
-        public int AddProduct (Product newProduct)
-        {
-            _dbContext.Products.Add(newProduct);
-            _dbContext.SaveChanges();
-            return newProduct.ProductName;
-        }
     }
 }
