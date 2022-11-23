@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using WestwindSystem.BLL;
 using WestWindSystem.BLL;
 using WestWindSystem.DAL;
 
@@ -30,6 +31,18 @@ namespace WestWindSystem
                 {
                     var context = serviceProvider.GetRequiredService<WestwindContext>();
                     return new ProductServices(context);
+                });
+
+                services.AddTransient<RegionServices>(serviceProvider =>
+                {
+                    var context = serviceProvider.GetRequiredService<WestwindContext>();
+                    return new RegionServices(context);
+                });
+
+                services.AddTransient<TerritoryServices>(serviceProvider =>
+                {
+                    var contetxt = serviceProvider.GetRequiredService<WestwindContext>();
+                    return new TerritoryServices(contetxt);
                 });
 
         }
