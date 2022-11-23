@@ -22,7 +22,7 @@ namespace WestwindWebApp.Pages.Products
 
             // Fetch from the system (CategoryServices) a list of Category
             CategoryList = _categoryServices.List();
-            CategorySelectionList = new SelectList(_categoryServices.List(), "Id", "CategoryName", SelectedCategoryId); //populate dropdown selection menu
+            //CategorySelectionList = new SelectList(_categoryServices.List(), "Id", "CategoryName", SelectedCategoryId); //populate dropdown selection menu
 
         }
         #endregion
@@ -32,7 +32,7 @@ namespace WestwindWebApp.Pages.Products
         [BindProperty]
         public int? SelectedCategoryId { get; set; }
 
-        public SelectList CategorySelectionList { get; private set; }
+        //public SelectList CategorySelectionList { get; private set; }
         #endregion
 
         [BindProperty]
