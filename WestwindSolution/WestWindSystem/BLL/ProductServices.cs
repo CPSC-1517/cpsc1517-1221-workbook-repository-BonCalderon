@@ -87,7 +87,7 @@ namespace WestWindSystem.BLL
             return rowsDeleted;
         }
 
-        public Product GetByID(int productID)
+        public Product? GetById(int productID)
         {
             var query = _dbContext
                 .Products

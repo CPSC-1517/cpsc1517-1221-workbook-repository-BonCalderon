@@ -28,7 +28,7 @@ namespace WestwindWebApp.Pages.Products
             CategorySelectList = new SelectList(categories, "Id", "CategoryName", SelectedCategoryId); //populate dropdown selection menu
 
             List<Supplier> suppliers = _supplierServices.List();
-            SupplierSelectList = new SelectList(suppliers,"SupplierId", "CompanyName");
+            SupplierSelectList = new SelectList(suppliers,"SupplierId", "SelectListText"); //selectListText is a property that gets 2 attribute that we need to display on the dropdownlist
           
         }
         #endregion

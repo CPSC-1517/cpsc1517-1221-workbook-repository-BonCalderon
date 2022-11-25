@@ -35,4 +35,14 @@ public  class Supplier
 
     [StringLength(24)]
     public string? Fax { get; set; }
+
+    [NotMapped]
+    public string SelectListText 
+    {
+        get
+        {
+            return $"{CompanyName} - {ContactName}";
+        }
+
+    }
 }
