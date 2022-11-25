@@ -64,31 +64,31 @@ namespace WestWindSystem.BLL
             return query.ToList();
         }
 
-        //public int AddCategory(Category newCategory)
-        //{
-        //    // Enforce business rule where CategoryName must be unique
-        //    bool exists = _dbContext.Categories.Any(c => c.CategoryName == newCategory.CategoryName);
-        //    if (exists)
-        //    {
-        //        throw new ArgumentException($"The Category Name {newCategory.CategoryName} already exists!");
-        //    }
+        public int AddCategory(Category newCategory)
+        {
+            // Enforce business rule where CategoryName must be unique
+            bool exists = _dbContext.Categories.Any(c => c.CategoryName == newCategory.CategoryName);
+            if (exists)
+            {
+                throw new ArgumentException($"The Category Name {newCategory.CategoryName} already exists!");
+            }
 
-        //    _dbContext.Categories.Add(newCategory);
-        //    _dbContext.SaveChanges();
-        //    return newCategory.CategoryID;
-        //}
+            _dbContext.Categories.Add(newCategory);
+            _dbContext.SaveChanges();
+            return newCategory.Id;
+        }
 
-        //public int UpdateCategory(Category existingCategory)
-        //{
-        //    _dbContext.Categories.Attach(existingCategory).State = EntityState.Modified;
-        //    int rowsUpdated = _dbContext.SaveChanges();
-        //    return rowsUpdated;
-        //}
+        public int UpdateCategory(Category existingCategory)
+        {
+            _dbContext.Categories.Attach(existingCategory).State = EntityState.Modified;
+            int rowsUpdated = _dbContext.SaveChanges();
+            return rowsUpdated;
+        }
 
-        //public int DeleteCategory(int categoryID)
+        //public int DeleteCategory(int categoryID) //this is hard delete and will actually get rid of the data in the database
         //{
         //    Category existingCategory = _dbContext.Categories
-        //        .Where(c => c.CategoryID == categoryID)
+        //        .Where(c => c.Id == categoryID)
         //        .Include(c => c.Products)
         //        .FirstOrDefault();
 
@@ -107,23 +107,23 @@ namespace WestWindSystem.BLL
         //    return rowsDeleted;
         //}
 
-        //public List<Category> Category_List()
-        //{
-        //    var query = _dbContext
-        //        .Categories
-        //        .OrderBy(item => item.CategoryName);
+        public List<Category> Category_List()
+        {
+            var query = _dbContext
+                .Categories
+                .OrderBy(item => item.CategoryName);
 
-        //    return query.ToList();
-        //}
+            return query.ToList();
+        }
 
-        //public Dictionary<int, string> Dictionary()
-        //{
-        //    var query = _dbContext
-        //        .Categories
-        //        .OrderBy(item => item.CategoryName)
-        //        .Select(item => new { item.CategoryID, item.CategoryName });
-        //    return query.ToDictionary(item => item.CategoryID, item => item.CategoryName);
-        //}
+        public Dictionary<int, string> Dictionary()
+        {
+            var query = _dbContext
+                .Categories
+                .OrderBy(item => item.CategoryName)
+                .Select(item => new { item.Id, item.CategoryName });
+            return query.ToDictionary(item => item.Id, item => item.CategoryName);
+        }
 
     }
 }

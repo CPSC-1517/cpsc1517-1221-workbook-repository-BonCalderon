@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using WestwindSystem.Entities;
 
 #region namepsaces for BLL and Entities
 using WestWindSystem.BLL;
@@ -14,16 +15,21 @@ namespace WestwindWebApp.Pages.Products
         #region Setup constructor DI for BLL
         private readonly CategoryServices _categoryServices;
         private readonly ProductServices _productServices;
+        private readonly SupplierServices _supplierServices;
 
-        public ProductCategoryModel(CategoryServices categoryServices, ProductServices productServices)
+        public ProductCategoryModel(CategoryServices categoryServices, ProductServices productServices, SupplierServices supplierServcies)
         {
             _categoryServices = categoryServices;
             _productServices = productServices;
+            _supplierServices = supplierServcies;
 
             // Fetch from the system (CategoryServices) a list of Category
             List<Category> categories = _categoryServices.List();
             CategorySelectList = new SelectList(categories, "Id", "CategoryName", SelectedCategoryId); //populate dropdown selection menu
 
+            List<Supplier> suppliers = _supplierServices.List();
+            SupplierSelectList = new SelectList(suppliers,"SupplierId", "CompanyName");
+          
         }
         #endregion
 
@@ -32,9 +38,14 @@ namespace WestwindWebApp.Pages.Products
 
         //Data source for category select element
         public SelectList CategorySelectList { get; private set; }
+
+        public SelectList SupplierSelectList { get; private set; }
         
         [BindProperty] //bindable property for value selected from select element 
         public int? SelectedCategoryId { get; set; }
+
+        
+        public int? SelectedSupplierId { get; set; }
         
         //query result list propery
         public List<Product>? QueryProductResultList { get; private set; }

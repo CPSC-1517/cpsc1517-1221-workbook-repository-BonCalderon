@@ -14,5 +14,7 @@ namespace WestWindSystem.Entities
         [Column(TypeName = "ntext")]public string? Description { get; set; } 
         [Column(TypeName = "varbinary")]public byte[]? Picture { get; set; } //byte array is simply binarydata 
         public string? PictureMimeType { get; set; }
+        //public virtual Product Product { get; set; } = null!;
+        //public bool Discontinued { get; set; }
     }
 }

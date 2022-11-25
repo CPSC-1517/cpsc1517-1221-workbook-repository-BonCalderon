@@ -55,6 +55,7 @@
             <tr>
                 <th>ID</th>
                 <th>Product Name</th>
+                <th>Supplier Name</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -64,6 +65,23 @@
                 <tr>
                     <td>@currentProduct.Id</td>
                     <td>@currentProduct.ProductName</td>
+                    <td>
+                        <select>
+                            @foreach(var item in Model.SupplierSelectList) //use this for deliverable!! , this make sure the dropdown select in the supplier name is the actual supplier in regards of the Productname
+                            {
+                                if(int.Parse(item.Value) == currentProduct.SupplierId)
+                                {
+                                    <option value="@item.Value" selected="selected">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                                
+                            }
+                        
+                        </select>
+                    </td>
                     <td><a href="/Products/ProductCRUD/@currentProduct.Id">Edit</a></td>
                 </tr>
             }

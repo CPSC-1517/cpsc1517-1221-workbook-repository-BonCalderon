@@ -45,6 +45,12 @@ namespace WestWindSystem
                     return new TerritoryServices(contetxt);
                 });
 
+                services.AddTransient<SupplierServices>(serviceProvider =>
+                {
+                    var contetxt = serviceProvider.GetRequiredService<WestwindContext>();
+                    return new SupplierServices(contetxt);
+                });
+
         }
         }
     
